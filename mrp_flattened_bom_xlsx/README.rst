@@ -2,22 +2,23 @@
    :target: https://www.gnu.org/licenses/agpl.html
    :alt: License: AGPL-3
 
-================================
-MRP BOM Structure Report Level 1
-================================
+=====================================
+MRP Flattened BOM Report XLSX
+=====================================
 
-This module adds a PDF report in BOM's to print just the first level of
-components. So, will not explode into the subcomponents.
+This module extends the functionality of the MRP capabilities of Odoo,
+and allows you to export the flattened BOM to MS Excel .XLSX format.
+It also mantain units correctly.
+
 
 Usage
 =====
 
 To use this module, you need to:
 
-#. Go to 'Manufacturing / Master Data / Bill of Materials'
-#. Select a BOM and
-#. Go to 'Print > BOM Structure (Level 1)'
-
+#. Go to 'Manufacturing / Products / Bill of Materials'
+#. Select a BOM or more BOMS
+#. Go to 'Action / Export Flattened BOM to Excel'.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -42,8 +43,8 @@ Images
 Contributors
 ------------
 
-* Jordi Ballester <jordi.ballester@eficent.com>
-* Miquel Raïch <miquel.raich@eficent.com>
+* Héctor Villarreal <hector.villarreal@eficent.com>
+
 
 Maintainer
 ----------
