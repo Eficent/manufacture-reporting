@@ -7,7 +7,7 @@ MRP BOM Structure Report XLSX Total
 =====================================
 
 This module extends the functionality of the MRP capabilities of Odoo,
-and allows you to export total of last childhood products needed of the BOM structure to MS Excel .XLSX format.
+and allows you to export total of last childhood products needed on the BOM structure to MS Excel .XLSX format.
 It also mantain units correctly.
 
 
