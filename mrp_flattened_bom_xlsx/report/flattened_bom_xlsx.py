@@ -89,4 +89,3 @@ class FlattenedBomXlsx(ReportXlsx):
 
 FlattenedBomXlsx('report.flattened.bom.xlsx', 'mrp.bom',
                  parser=report_sxw.rml_parse)
-
