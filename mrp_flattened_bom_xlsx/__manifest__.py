@@ -10,9 +10,9 @@
     'author': "Eficent, Odoo Community Association (OCA)",
     'website': 'https://github.com/OCA/manufacture-reporting',
     'license': 'AGPL-3',
-    "depends": ['mrp_bom_structure_xlsx'],
-    "data": [
+    'depends': ['report_xlsx', 'mrp'],
+    'data': [
         'report/flattened_bom_xlsx.xml',
     ],
-    "installable": True
+    'installable': True
 }

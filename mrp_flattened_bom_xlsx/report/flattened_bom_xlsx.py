@@ -6,8 +6,6 @@
 import logging
 from odoo.report import report_sxw
 from odoo.tools.translate import _
-from odoo.addons.mrp_bom_structure_xlsx.report.bom_structure_xlsx import \
-    BomStructureXlsx
 
 _logger = logging.getLogger(__name__)
 
@@ -21,7 +19,7 @@ except ImportError:
             pass
 
 
-class FlattenedBomXlsx(BomStructureXlsx):
+class FlattenedBomXlsx(ReportXlsx):
 
     def print_flattened_bom_lines(self, bom, requirements, sheet, row):
         i = row
@@ -91,3 +89,4 @@ class FlattenedBomXlsx(BomStructureXlsx):
 
 FlattenedBomXlsx('report.flattened.bom.xlsx', 'mrp.bom',
                  parser=report_sxw.rml_parse)
+
