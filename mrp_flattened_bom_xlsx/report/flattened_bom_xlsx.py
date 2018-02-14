@@ -42,20 +42,37 @@ class FlattenedBomXlsx(ReportXlsx):
     def generate_xlsx_report(self, workbook, data, objects):
 
         def _compute_flattened_totals(bom, factor=1):
-            factor *= bom.product_qty
-            for line in bom.bom_line_ids:
-                sub_bom = bom._bom_find(product=line.product_id)
-                if sub_bom:
-                    _compute_flattened_totals(sub_bom, factor)
+            totals = {}
+            if not bom.product_id:
+                product = bom.product_tmpl_id.product_variant_ids[0]
+            else:
+                product = bom.product_id
+            boms_done, lines_done = bom.flattened_bom(product, 1.0)
+            for line_done in lines_done:
+                bom_line, res = line_done
+                if bom_line.product_id in totals:
+                    totals[bom_line.product_id] += res['qty']
                 else:
-                    if totals.get(line.product_id):
-                        totals[line.product_id] += line.product_uom_id.\
-                            _compute_quantity(
-                            line.product_qty*factor, line.product_id.uom_id)
-                    else:
-                        totals[line.product_id] = line.product_uom_id.\
-                            _compute_quantity(
-                            line.product_qty*factor, line.product_id.uom_id)
+                    totals[bom_line.product_id] = res['qty']
+            return totals
+            # prev_factor = factor
+            # for line in bom.bom_line_ids:
+            #     sub_bom = bom._bom_find(product=line.product_id)
+            #     if sub_bom:
+            #         converted_line_quantity = line.product_uom_id._compute_quantity(
+            #             line.product_qty, line.product_id.uom_id)
+            #
+            #         _compute_flattened_totals(sub_bom, factor)
+            #     else:
+            #         if totals.get(line.product_id):
+            #             totals[line.product_id] += line.product_uom_id.\
+            #                 _compute_quantity(
+            #                 line.product_qty*factor, line.product_id.uom_id)
+            #         else:
+            #             totals[line.product_id] = line.product_uom_id.\
+            #                 _compute_quantity(
+            #                 line.product_qty, line.product_id.uom_id)
+            #     factor = prev_factor
 
         workbook.set_properties({
             'comments': 'Created with Python and XlsxWriter from Odoo 9.0'})
@@ -82,8 +99,7 @@ class FlattenedBomXlsx(ReportXlsx):
         sheet.freeze_panes(2, 0)
         i = 2
         for o in objects:
-            totals = {}
-            _compute_flattened_totals(o)
+            totals = _compute_flattened_totals(o, o.product_qty)
             i = self.print_flattened_bom_lines(o, totals, sheet, i)
 
 
