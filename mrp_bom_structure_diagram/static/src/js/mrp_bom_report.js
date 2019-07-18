@@ -31,7 +31,7 @@ odoo.define('mrp.mrp_bom_report_diagram', function (require) {
         _renderDiagram: function (bom_data) {
             var self = this;
             $(".o_mrp_bom_report_page").after(function() {
-                return '<div class="container o_mrp_bom_report_page">' +
+                return '<div id="diagram" class="container o_mrp_bom_report_page">' +
                         '<div class="row"><div class="col-lg-12"><h1>BoM Diagram</h1></div></div>' +
                         '<div style="width:100%; margin:20px;" id="orgchart" class="orgchart"/>' +
                        '</div>';
@@ -80,7 +80,7 @@ odoo.define('mrp.mrp_bom_report_diagram', function (require) {
             } else {
                 $('#showDiagram').text('show diagram')
 //                $(".o_mrp_bom_report_page").css("display", "block");
-                $('.orgchart').remove()
+                $('#diagram').remove()
                 return false
             }
         },
