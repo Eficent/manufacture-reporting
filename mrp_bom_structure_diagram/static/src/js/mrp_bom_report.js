@@ -37,7 +37,7 @@ odoo.define('mrp.mrp_bom_report_diagram', function (require) {
                        '</div>';
             });
 
-//            OrgChart.templates.myTemplate = Object.assign({}, OrgChart.templates.ana);
+            OrgChart.templates.myTemplate = Object.assign({}, OrgChart.templates.ana);
 //            OrgChart.templates.myTemplate.size = [100, 100];
 //            OrgChart.templates.myTemplate.node = '<circle cx="50" cy="50" r="50" fill="#4D4D4D" stroke-width="1" stroke="#1C1C1C"></circle>';
 //            OrgChart.templates.myTemplate.ripple = {
@@ -45,15 +45,19 @@ odoo.define('mrp.mrp_bom_report_diagram', function (require) {
 //                color: "#0890D3",
 //                rect: null
 //            };
+            OrgChart.templates.myTemplate.field_0 = '<text width="230" text-overflow="multiline" style="font-size: 16px;font-weight: bold;" fill="#ffffff" x="125" y="90" text-anchor="middle">{val}</text>';
+            OrgChart.templates.myTemplate.field_1 = '<text width="230" style="font-size: 20px;border: 5px solid #00bfb6;" fill="#ffffff" x="125" y="60" text-anchor="middle">{val}</text>';
 
             var chart = new OrgChart(document.getElementById("orgchart"), {
-//                template: "myTemplate",
+                template: "myTemplate",
                 showXScroll: BALKANGraph.scroll.visible,
                 showYScroll: BALKANGraph.scroll.visible,
                 mouseScrool: BALKANGraph.action.yScroll,
                 enableSearch: false,
                 nodeBinding: {
-                    field_0: "name"
+                    field_0: "name",
+                    field_1: "description",
+                    img_0: "img"
                 },
                 scaleInitial: OrgChart.match.width,
                 nodes: bom_data,
@@ -74,12 +78,12 @@ odoo.define('mrp.mrp_bom_report_diagram', function (require) {
         },
         _toggleButton: function () {
             if ($('#showDiagram').text() == 'show diagram') {
-//                $(".o_mrp_bom_report_page").css("display", "none");
+                $(".o_mrp_bom_report_page").css("display", "none");
                 $('#showDiagram').text('hide diagram')
                 return true
             } else {
                 $('#showDiagram').text('show diagram')
-//                $(".o_mrp_bom_report_page").css("display", "block");
+                $(".o_mrp_bom_report_page").css("display", "block");
                 $('#diagram').remove()
                 return false
             }
