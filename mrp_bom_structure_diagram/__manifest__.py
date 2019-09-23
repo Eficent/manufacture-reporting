@@ -10,7 +10,10 @@
     'author': 'Eficent Business and IT Consulting Services S.L.,'
               'Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/manufacture-reporting',
-    'depends': ['mrp'],
+    'depends': [
+        'mrp',
+        'web_orgchart_library',
+    ],
     'data': [
         'views/mrp_templates.xml',
     ],
